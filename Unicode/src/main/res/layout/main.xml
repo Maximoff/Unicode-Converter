@@ -3,11 +3,32 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:gravity="center">
+	android:orientation="vertical">
 
-	<TextView
-		android:text="@string/hello_world"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"/>
+	<EditText
+		android:layout_width="match_parent"
+		android:inputType="textMultiLine"
+		android:layout_height="wrap_content"
+		android:ems="10"
+		android:layout_weight="1.0"
+		android:id="@+id/mainEditText1"
+		android:hint="String"
+		android:gravity="top"/>
+
+	<View
+		android:background="?android:attr/dividerVertical"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"/>
+
+	<EditText
+		android:layout_width="match_parent"
+		android:inputType="textMultiLine"
+		android:layout_height="wrap_content"
+		android:ems="10"
+		android:layout_weight="1.0"
+		android:id="@+id/mainEditText2"
+		android:hint="Unicode"
+		android:gravity="top"/>
 
 </LinearLayout>
+
