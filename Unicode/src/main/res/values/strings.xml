@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Unicode</string>
-    <string name="hello_world">Hello, World!</string>
-
+    <string name="app_name">Unicode Converter</string>
+	<string name="bad">Bad string!</string>
+	<string name="copied">Copied!</string>
+	<string name="refresh">Refresh</string>
+    <string name="text">Text</string>
+	<string name="unicode">Unicode</string>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Конвертер юникода</string>
+	<string name="bad">Некорректная строка!</string>
+	<string name="copied">Скопировано!</string>
+	<string name="refresh">Обновить</string>
+    <string name="text">Текст</string>
+	<string name="unicode">Юникод</string>
+</resources>

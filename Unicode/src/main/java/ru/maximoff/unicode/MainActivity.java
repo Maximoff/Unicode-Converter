@@ -1,30 +1,45 @@
 package ru.maximoff.unicode;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import ru.maximoff.unicode.R;
 
 public class MainActivity extends Activity {
+	private EditText str;
+	private EditText uni;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-		final EditText str = findViewById(R.id.mainEditText1);
-		final EditText uni = findViewById(R.id.mainEditText2);
+		str = findViewById(R.id.mainEditText1);
+		uni = findViewById(R.id.mainEditText2);
 		str.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence p1, int p2, int p3, int p4) {
-
+					// todo
 				}
 
 				@Override
 				public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
-
+					// todo
 				}
 
 				@Override
@@ -33,7 +48,7 @@ public class MainActivity extends Activity {
 						try {
 							uni.setText(string2unicode(p1.toString()));
 						} catch (Exception e) {
-							Toast.makeText(MainActivity.this, "Bad string!", Toast.LENGTH_SHORT).show();
+							Toast.makeText(MainActivity.this, R.string.bad, Toast.LENGTH_SHORT).show();
 						}
 					}
 				}
@@ -41,12 +56,12 @@ public class MainActivity extends Activity {
 		uni.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence p1, int p2, int p3, int p4) {
-
+					// todo
 				}
 
 				@Override
 				public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
-
+					// todo
 				}
 
 				@Override
@@ -55,11 +70,28 @@ public class MainActivity extends Activity {
 						try {
 							str.setText(unicode2string(p1.toString()));
 						} catch (Exception e) {
-							Toast.makeText(MainActivity.this, "Bad unicode string!", Toast.LENGTH_SHORT).show();
+							Toast.makeText(MainActivity.this, R.string.bad, Toast.LENGTH_SHORT).show();
 						}
 					}
 				}
 			});
+		ImageView copyStr = findViewById(R.id.mainImageView1);
+		copyStr.setClickable(true);
+		copyStr.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View p1) {
+					setClipboard(str.getText().toString());
+				}
+			});
+		ImageView copyUni = findViewById(R.id.mainImageView2);
+		copyUni.setClickable(true);
+		copyUni.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View p1) {
+					setClipboard(uni.getText().toString());
+				}
+			});
+		showKeyboard();
     }
 
 	private String unicode2string(String str) throws Exception {
@@ -86,5 +118,53 @@ public class MainActivity extends Activity {
 			}
 		}
 		return sb.toString();
+	}
+
+	private void setClipboard(String text) {
+		if (text.equals("")) {
+			return;
+		}
+		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+		ClipData clip = ClipData.newPlainText("Copied Text", text);
+		clipboard.setPrimaryClip(clip);
+		Toast.makeText(this, R.string.copied, Toast.LENGTH_SHORT).show();
+	}
+
+	private void showKeyboard() {
+		new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					str.requestFocus();
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.showSoftInput(str, InputMethodManager.SHOW_IMPLICIT);
+				}
+			}, 100);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.refresh:
+				str.setText("");
+				uni.setText("");
+				showKeyboard();
+				return true;
+
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		finish();
 	}
 }

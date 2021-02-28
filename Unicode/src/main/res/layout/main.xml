@@ -5,30 +5,60 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<EditText
+	<RelativeLayout
 		android:layout_width="match_parent"
-		android:inputType="textMultiLine"
 		android:layout_height="wrap_content"
-		android:ems="10"
-		android:layout_weight="1.0"
-		android:id="@+id/mainEditText1"
-		android:hint="String"
-		android:gravity="top"/>
+		android:layout_weight="1.0">
+
+		<EditText
+			android:layout_width="match_parent"
+			android:inputType="textMultiLine"
+			android:layout_height="match_parent"
+			android:ems="10"
+			android:id="@+id/mainEditText1"
+			android:hint="@string/text"
+			android:gravity="top"/>
+		
+		<ImageView
+			android:src="@drawable/ic_copy"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="5dp"
+			android:layout_marginTop="5dp"
+			android:layout_alignParentRight="true"
+			android:id="@+id/mainImageView1"/>
+
+	</RelativeLayout>
 
 	<View
 		android:background="?android:attr/dividerVertical"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"/>
 
-	<EditText
+	<RelativeLayout
 		android:layout_width="match_parent"
-		android:inputType="textMultiLine"
 		android:layout_height="wrap_content"
-		android:ems="10"
-		android:layout_weight="1.0"
-		android:id="@+id/mainEditText2"
-		android:hint="Unicode"
-		android:gravity="top"/>
+		android:layout_weight="1.0">
+
+		<EditText
+			android:layout_width="match_parent"
+			android:inputType="textMultiLine"
+			android:layout_height="match_parent"
+			android:ems="10"
+			android:id="@+id/mainEditText2"
+			android:hint="@string/unicode"
+			android:gravity="top"/>
+		
+		<ImageView
+			android:src="@drawable/ic_copy"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="5dp"
+			android:layout_marginTop="5dp"
+			android:layout_alignParentRight="true"
+			android:id="@+id/mainImageView2"/>
+
+	</RelativeLayout>
 
 </LinearLayout>
 
